@@ -29,11 +29,19 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public void addCustomer(@Valid Customer customer) {
+	public void saveCustomer(@Valid Customer customer) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		session.save(customer);
+		session.saveOrUpdate(customer);
 		
+	}
+
+	@Override
+	public Customer getCustomer(int id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Customer customer = session.get(Customer.class, id);
+		return customer;
 	}
 
 }

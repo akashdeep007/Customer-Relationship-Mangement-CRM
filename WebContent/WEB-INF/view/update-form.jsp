@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+    pageEncoding="ISO-8859-1"%>
+  <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="ISO-8859-1">
+<title>Customer-Update Form</title>
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/add-customer-style.css" />
-<meta charset="ISO-8859-1">
-<title>Add Customer</title>
 </head>
 <body>
 
@@ -17,7 +17,8 @@
 		</div>
 		<div id="container">
 			<form:form action="saveCustomer" modelAttribute="customer" method="POST">
-			<h2>Add Customer</h2>
+			<h2>Update Customer</h2>
+			<form:hidden path="id"/>
 				<table>				
 					<tbody>
 						<tr>
@@ -36,13 +37,10 @@
 							<td><form:errors path="email"></form:errors></td>
 						</tr>
 						<tr>
-							<td><input type="submit" value="Save"></td>
+							<td><input type="submit" value="Update"></td>
 						</tr>
 					</tbody>
 				</table>
-
-
-
 			</form:form>
 		</div>
 	</div>
