@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.springdemo.utils.SortingUtils"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,20 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css" />
 </head>
 <body>
+	<c:url var="sortLinkFirstName" value="/customer/list">
+		<c:param name="sort"
+			value="<%=Integer.toString(SortingUtils.FIRST_NAME)%>" />
+	</c:url>
+
+	<c:url var="sortLinkLastName" value="/customer/list">
+		<c:param name="sort"
+			value="<%=Integer.toString(SortingUtils.LAST_NAME)%>" />
+	</c:url>
+
+	<c:url var="sortLinkEmail" value="/customer/list">
+		<c:param name="sort"
+			value="<%=Integer.toString(SortingUtils.EMAIL)%>" />
+	</c:url>
 	<div id="wrapper">
 		<div id="header">
 			<h2>CRM - Customer Relationship Manager</h2>
@@ -22,9 +37,9 @@
 				<table>
 					<thead>
 						<tr>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Email</th>
+							<th><a href="${sortLinkFirstName}">First Name</a></th>
+							<th><a href="${sortLinkLastName}">Last Name</a></th>
+							<th><a href="${sortLinkEmail}">Email</a></th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -41,7 +56,9 @@
 								<td>${tempCustomer.firstName}</td>
 								<td>${tempCustomer.lastName}</td>
 								<td>${tempCustomer.email}</td>
-								<td><a href="${UpdateLink}">Update</a>|<a href="${DeleteLink}" onclick="if !(confirm('Are you sure you want to Delete?'))return false;">Delete</a></td>
+								<td><a href="${UpdateLink}">Update</a>|<a
+									href="${DeleteLink}"
+									onclick="if !(confirm('Are you sure you want to Delete?'))return false;">Delete</a></td>
 							</tr>
 
 						</c:forEach>

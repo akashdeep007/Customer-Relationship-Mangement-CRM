@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.springdemo.entity.Customer;
+import com.springdemo.utils.SortingUtils;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
@@ -19,11 +20,26 @@ public class CustomerDAOImpl implements CustomerDAO {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<Customer> getCustomers() {
+	public List<Customer> getCustomers(int sort) {
 		// TODO Auto-generated method stub
+String theFieldName = null;
 		
+		switch (sort) {
+			case SortingUtils.FIRST_NAME: 
+				theFieldName = "firstName";
+				break;
+			case SortingUtils.LAST_NAME:
+				theFieldName = "lastName";
+				break;
+			case SortingUtils.EMAIL:
+				theFieldName = "email";
+				break;
+			default:
+				theFieldName = "lastName";
+		}
 		Session session = sessionFactory.getCurrentSession();
-		Query<Customer> query = session.createQuery("from Customer", Customer.class);
+		String queryString = "from Customer order by " + theFieldName;
+		Query<Customer> query = session.createQuery(queryString, Customer.class);
 		List<Customer> customer = query.getResultList();			
 		return customer;
 	}
