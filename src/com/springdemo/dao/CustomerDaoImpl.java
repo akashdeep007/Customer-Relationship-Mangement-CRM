@@ -68,4 +68,20 @@ String theFieldName = null;
 		session.delete(del);
 	}
 
+	@Override
+	public List<Customer> searchCustomer(String name) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		 Query<Customer> query = null;
+		 if (name != null && name.trim().length() > 0) {
+	            query =session.createQuery("from Customer where lower(firstName) like :theName or lower(lastName) like :theName", Customer.class);
+	            query.setParameter("theName", "%" + name.toLowerCase() + "%");
+	        }
+	        else {
+	            query =session.createQuery("from Customer", Customer.class);            
+	        }
+		 List<Customer> customers = query.getResultList();
+		return customers;
+	}
+
 }

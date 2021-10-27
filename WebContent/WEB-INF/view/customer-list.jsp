@@ -33,6 +33,10 @@
 		<div id="container">
 			<input type="button" value="Add Customer"
 				onclick="window.location.href='showAddCustomer';" />
+			<form action="searchCustomer">
+			<label>Search Customer : </label><input type="text" name="searchName">
+			<input type="submit" value="Search">
+			</form>
 			<div id="content">
 				<table>
 					<thead>
